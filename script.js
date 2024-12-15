@@ -22,7 +22,7 @@ cancelarb.addEventListener("click", () => {
 confirmarb.addEventListener("click", () => {
 // setar o evento do botão depois 
     calendario.hidden = true; 
-});
+})
 
 //renderizar as datas na interface do calendário
 const mostrarDatas = () => {
