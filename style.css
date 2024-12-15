@@ -1,0 +1,146 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Oswald:wght@200..700&display=swap');
+
+:root {
+    --rosa1: #E0899C;
+    --rosa2: #C8687D;
+    --rosa3: #8D3046;
+}
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Nunito", Arial;
+}
+
+body {
+    background-color: #e0899c8f;
+    padding: 50px;
+    display: flex;
+    justify-content: center;
+
+    .container {
+        position: relative;
+    
+        #seletordata {
+            padding: 10px;
+            font-size: 15px;
+            border-radius: 5px;
+            width: 200px;
+            border: 1px solid lightgray;
+        }
+    }
+}
+
+
+
+.calendario {
+    position: absolute;
+    top: 95px;
+    z-index: 100;
+    background-color: white;
+    padding: 10px;
+    width: auto;
+    border-radius: 5px;
+    
+    .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-bottom: 10px;
+        border-bottom: 1px solid rgba(211, 211, 211, 0.678);
+        
+        #seletorano, #seletormes {
+            font-size: 14px;
+            border: 1px solid rgba(211, 211, 211, 0.678);
+            max-width: 90px;
+            border-radius: 5px;
+        }
+
+        .next, .prev {
+            width: 40px;
+            font-size: 15px;
+            border: none;
+            background-color: white;
+            cursor: pointer;
+
+        }
+
+        .next:hover, .prev:hover {
+            color: #8D3046;
+            transition-duration: 0.2s;
+        }
+    
+            
+    }
+
+    .dias, .datas {
+        display: grid;
+        grid-template-columns: repeat(7, 32px);
+        gap: 10px;
+        margin-block: 10px;
+
+        > span {
+            font-weight: 800;
+            font-size: 14px;
+            text-transform: uppercase;
+            text-align: center;
+        }
+    }
+    
+    .datas {
+
+        > button {
+            border-radius: 5px;
+            border: none;
+            aspect-ratio: 1;
+            cursor: pointer;
+            background-color: transparent;
+            font-size: 14px;
+            font-weight: 400;
+            text-transform: uppercase;         
+        }
+
+        button:hover {
+            background-color: lightgray;
+            transition-duration: 0.2s;
+        }
+
+        .hoje {
+            background-color: #c8687dcb;
+            color: #8D3046;
+        }
+
+        .selecionado {
+            background-color: #8d3046f5;
+            color: white;
+        }
+    }
+
+    .footer {
+        display: flex;
+        justify-content: space-between;
+        padding-top: 10px;
+        border-top: 1px solid rgba(211, 211, 211, 0.678);
+
+        
+
+        .cancelar, .confirmar {
+            font-size: 13px;
+            text-transform: uppercase;
+            font-weight: 800;
+            border: none;
+            background-color: white;
+            cursor: pointer;
+
+        }
+
+        .cancelar:hover, .confirmar:hover {
+            color: #8D3046;
+            transition-duration: 0.2s;
+        }
+
+    }
+}

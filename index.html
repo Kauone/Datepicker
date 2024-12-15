@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendário</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="script.js"></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    
+</head>
+<body>
+    <div class="container">
+        <input type="text" name="seletordata" id="seletordata" placeholder="Selecione a data">
+    </div>
+    <div class="calendario">
+
+        <div class="header">
+            <button class="prev">
+                <i class='bx bxs-left-arrow'></i>
+            </button>
+
+            <div>
+                <select name="seletormes" id="seletormes">
+                    <option value="janeiro">Janeiro</option>
+                    <option value="fevereiro">Fevereiro</option>
+                    <option value="março">Março</option>
+                    <option value="abril">Abril</option>
+                    <option value="maio">Maio</option>
+                    <option value="junho">Junho</option>
+                    <option value="julho">Julho</option>
+                    <option value="agosto">Agosto</option>
+                    <option value="setembro">Setembro</option>
+                    <option value="outubro">Outubro</option>
+                    <option value="novembro">Novembro</option>
+                    <option value="dezembro">Dezembro</option>
+                </select>
+                <input type="number" name="seletorano" id="seletorano" value="2024">
+            </div>
+
+            <button class="next">
+                <i class='bx bxs-right-arrow'></i>
+            </button>
+        </div>
+
+        <div class="dias">
+            <span>Dom</span>
+            <span>Seg</span>
+            <span>Ter</span>
+            <span>Qua</span>
+            <span>Qui</span>
+            <span>Sex</span>
+            <span>Sab</span>
+        </div>
+        <div class="datas">
+        </div>
+
+        <div class="footer">
+            <button class="cancelar">Cancelar</button>
+            <button class="confirmar">Confirmar</button>       
+        </div>
+
+    </div>
+</body>
+</html>
