@@ -108,6 +108,11 @@ body {
             transition-duration: 0.2s;
         }
 
+        button:disabled {
+            pointer-events: none;
+            user-select: none;
+        }
+
         .hoje {
             background-color: #c8687dcb;
             color: #8D3046;
