@@ -1,7 +1,11 @@
 const calendario = document.querySelector(".calendario");
-const seletordata = document.getElementById("seletordata");
+const seletorData = document.getElementById("seletordata");
+const seletorMes = document.getElementById("seletormes");
+const seletorAno = document.getElementById("seletorano");
 const cancelarb = document.querySelector(".cancelar");
 const confirmarb = document.querySelector(".confirmar");
+const prevb = document.querySelector(".prev");
+const nextb = document.querySelector(".next");
 const datas = document.querySelector(".datas");
 
 let dataSelecionada = new Date();
@@ -16,11 +20,11 @@ seletordata.addEventListener("click", () => {
 const clickData = (e) => {
     const button = e.target;
 
-    // remove a classe "selecionado" dos outros botões
+    // remover a classe "selecionado" dos outros buttons 
     const selecionado = datas.querySelector(".selecionado");
     selecionado && selecionado.classList.remove("selecionado");
 
-    //adiciona a classe "selecionado" para o botão atual
+    //adiciona a classe "selecionado" para o button atual
     button.classList.add("selecionado");
 
     // define a data selecionada 
@@ -32,14 +36,53 @@ cancelarb.addEventListener("click", () => {
     calendario.hidden = true; 
 });
 
+//click event próximo mês e ano (button)
+nextb.addEventListener("click", () => {
+    if (mes === 11) ano++;
+    mes = (mes + 1) % 12; 
+    mostrarDatas();
+});
+
+prevb.addEventListener("click", () => {
+    if (mes === 0) ano--;
+    mes = (mes - 1 + 12) % 12; 
+    mostrarDatas();
+});
+
+//lidar com o click event do próximo mês
+seletorMes.addEventListener("change" , () => {
+    mes = seletorMes.selectedIndex;
+    mostrarDatas();
+});
+
+//lidar com o click event do próximo ano
+seletorAno.addEventListener("change" , () => {
+    ano = seletorAno.value;
+    mostrarDatas();
+});
+
+const updateMesAno = () => {
+    seletorMes.selectedIndex = mes;
+    seletorAno.value = ano;
+};
+
 //click event confirmar button 
 confirmarb.addEventListener("click", () => {
-// setar o evento do botão depois 
-    calendario.hidden = true; 
-})
+// setar a data selecionada 
+    seletorData.value = dataSelecionada.toLocaleDateString ("pt-BR", {
+        ano: "numeric",
+        mes: "2-digit",
+        dia: "2-digit",
+    });
+
+    //esconder calendário
+    calendario.hidden = true
+});
 
 //renderizar as datas na interface do calendário
 const mostrarDatas = () => {
+    //update ano e mes todas as vezes que as datas forem mudadas
+    updateMesAno();
 //limpar as datas
 datas.innerHTML = "";
 
@@ -51,7 +94,7 @@ const ultimaDoMesAnterior = new Date(ano, mes, 0 );
 for (let i = 0; i <= ultimaDoMesAnterior.getDay(); i++) {
 
     const text = ultimaDoMesAnterior.getDate() - ultimaDoMesAnterior.getDay() + i;
-    const button = createButton(text, true, false);
+    const button = createButton(text, true);
     datas.appendChild(button);
 }
 //mostrar o mês atual 
@@ -61,9 +104,9 @@ const ultimoDoMes = new Date(ano, mes +1, 0);
 
 for(let i = 1; i <= ultimoDoMes.getDate(); i++) {
 
-    const eHoje = dataSelecionada.getDate() === i && dataSelecionada.getFullYear() === ano && dataSelecionada.getMonth() === mes;
+    
 
-    const button = createButton (i, false, eHoje);
+    const button = createButton (i, false);
     button.addEventListener("click", clickData);
     datas.appendChild(button);
 }
@@ -72,15 +115,24 @@ for(let i = 1; i <= ultimoDoMes.getDate(); i++) {
 
 const primeiraDoProximomes = new Date(ano, mes, + 1, 1);
 
-for (let i = primeiraDoProximomes.getDay(); i < 4; i++) {
+for (let i = primeiraDoProximomes.getDay(); i < 0; i++) {
     const text = primeiraDoProximomes.getDate() - primeiraDoProximomes.getDay() + i;
-    const button = createButton(text, true, false);
+    const button = createButton(text, true);
     datas.appendChild(button);
 }
 
 };
 
-const createButton = (text, isDisabled = false, eHoje = false) => {
+const createButton = (text, isDisabled = false) => {
+
+    const dataAtual = new Date();
+
+    // checar se o button é o dia de hoje 
+    const eHoje = dataAtual.getDate() === text && dataAtual.getFullYear() === ano && dataAtual.getMonth() === mes;
+
+    // checar se o button está selecionado 
+    const selecionado = dataSelecionada.getDate() === text && dataSelecionada.getFullYear() === ano && dataSelecionada.getMonth() === mes;
+
     const button = document.createElement("button");
     button.textContent = text;
     button.disabled = isDisabled;
